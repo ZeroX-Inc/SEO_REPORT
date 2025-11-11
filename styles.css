@@ -87,6 +87,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+.donate-btn a{
+    text-decoration: none;
+    color:#fff;
+}
 
 .donate-btn:hover {
     background: #c00020;
