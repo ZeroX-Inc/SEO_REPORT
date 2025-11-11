@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="impacts-section-v2.css">
+
+
+
 </head>
 <body>
     <!-- Navigation Header -->
@@ -21,16 +26,315 @@
     </header>
 
     <!-- Hero Section -->
+  
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section Only</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Founders Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.6) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1.2s ease;
+            padding: 40px 20px;
+        }
+
+        .hero-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-year {
+            font-size: clamp(60px, 12vw, 140px);
+            letter-spacing: 8px;
+            animation: slideInFromLeft 1s ease 0.2s both;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-impact {
+            font-size: clamp(70px, 14vw, 160px);
+            letter-spacing: 12px;
+            animation: scaleIn 1s ease 0.4s both;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .hero-impact::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: #eb0029;
+            animation: expandWidth 0.8s ease 1s both;
+        }
+
+        .hero-summary {
+            font-size: clamp(50px, 10vw, 120px);
+            letter-spacing: 10px;
+            animation: slideInFromRight 1s ease 0.6s both;
+            background: linear-gradient(135deg, #eb0029 0%, #ff1744 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            animation: fadeIn 1s ease 1.5s both;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 3px solid #ffffff;
+            border-radius: 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 80%;
+            }
+        }
+
+        @keyframes scrollDown {
+            0%, 100% { 
+                top: 10px; 
+                opacity: 1; 
+            }
+            50% { 
+                top: 30px; 
+                opacity: 0.3; 
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero-year {
+                font-size: 50px;
+                letter-spacing: 4px;
+            }
+
+            .hero-impact {
+                font-size: 60px;
+                letter-spacing: 6px;
+            }
+
+            .hero-summary {
+                font-size: 40px;
+                letter-spacing: 5px;
+            }
+
+            .hero-title {
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-overlay"></div>
+        <img src="images/hero.jpg" alt="2025 Impact Summary" class="hero-background">
         <div class="container">
             <div class="hero-content">
-                <img src="https://page.gensparksite.com/v1/base64_upload/836adc2c5e867a72cd023208cfcad97d" alt="2025 Impact Summary" class="hero-image">
+                <div class="hero-text-wrapper">
+                    <h1 class="hero-title">
+                        <span class="hero-year">2025</span>
+                        <span class="hero-impact">IMPACT</span>
+                        <span class="hero-summary">SUMMARY</span>
+                    </h1>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator">
             <div class="scroll-arrow"></div>
         </div>
     </section>
+
+    <script>
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.hero-background');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (heroBackground) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+            
+            // Fade out hero content on scroll
+            const hero = document.querySelector('.hero');
+            if (hero && heroContent) {
+                const opacity = 1 - (scrolled / (window.innerHeight * 0.8));
+                heroContent.style.opacity = Math.max(0, opacity);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
 
     <!-- Mission Statement -->
     <section class="mission">
@@ -59,7 +363,7 @@
                     </div>
                 </div>
                 <div class="vp-profile">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/4fa9aa7b7770d46d2f49af5f93c78e94" alt="Andrew Fairbairn" class="vp-image">
+                    <img src="images/vice president.png" alt="Andrew Fairbairn" class="vp-image">
                     <div class="vp-info">
                         <h3 class="vp-name">Andrew Fairbairn</h3>
                         <p class="vp-position">Executive Vice President,<br>Sponsors for Educational Opportunity</p>
@@ -68,6 +372,494 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Program overview -->
+     <!-- ========================================
+     PROGRAM OVERVIEW SECTION - HTML ONLY
+     ======================================== -->
+
+<section class="program-overview">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2 class="section-main-title">Tech Developer Program Overview</h2>
+            <p class="section-subtitle">DIFFICULTIES WITH EARLY CAREER HIRING</p>
+        </div>
+
+        <!-- SVG Curve Path Container -->
+        <div class="curve-container">
+            <svg class="curve-path" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+                <!-- Curve Path -->
+                <path class="curve-line" d="M 100,500 Q 250,200 400,350 T 700,250 T 1000,200" fill="none" stroke="#eb0029" stroke-width="6"/>
+                
+                <!-- Dots on the curve -->
+                <circle class="curve-dot" cx="100" cy="500" r="12" fill="#babcbf"/>
+                <circle class="curve-dot" cx="400" cy="350" r="12" fill="#babcbf"/>
+                <circle class="curve-dot" cx="700" cy="250" r="12" fill="#babcbf"/>
+                <circle class="curve-dot" cx="1000" cy="200" r="12" fill="#babcbf"/>
+            </svg>
+
+            <!-- Content Cards Positioned Along Curve -->
+            <div class="curve-content">
+                <!-- Card 1: Resume Overload -->
+                <div class="info-card card-1" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="card-title">Resume Overload</h3>
+                    <p class="card-text">
+                        Per Handshake's 2025 Internship Index, tech internships receive an average of 271 applications per posting, a 65% increase from last year. Some roles received upwards of 15,000 applications. AI tools and one-click apply has flooded roles with undifferentiated resumes.
+                    </p>
+                </div>
+
+                <!-- Card 2: Interview Pass-Through Rate -->
+                <div class="info-card card-2" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="card-title">Interview Pass-Through Rate at Historic Lows</h3>
+                    <p class="card-text">
+                        Only 15% of applicants reach first round interviews with a human recruiter (Veris Insights, 2025). Recruiting teams are getting smaller and selective with an increasing reliance on AI-automation or personal referrals that can be biased.
+                    </p>
+                </div>
+
+                <!-- Card 3: Onboarding -->
+                <div class="info-card card-3" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="card-title">Onboarding</h3>
+                    <p class="card-text">
+                        Computer Science grads often lack team-readiness and skills on modern software engineering practices. There is a steep learning curve slowing down onboarding, costing time and coaching bandwidth (SHRM-Glassdoor Insights).
+                    </p>
+                </div>
+
+                <!-- Card 4: US School-to-Work Crisis -->
+                <div class="info-card card-4" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="card-title">US School-to-Work Crisis</h3>
+                    <p class="card-text">
+                        Parents, schools, employers, and mentors all influence students' readiness, but few take full responsibility. Students must then self-navigate the gap from classroom to career often without networks or relevant guidance (Shultz Family Foundation, 2025).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="decorative-circle circle-left"></div>
+        <div class="decorative-circle circle-right"></div>
+    </div>
+</section>
+
+
+
+<!-- ========================================
+     SOLUTION SECTION 
+     ======================================== -->
+
+<section class="solution-section">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="section-header">
+            <h2 class="solution-title">Our Solution: A Scalable Talent Accelerator</h2>
+        </div>
+
+        <!-- Introduction Text -->
+        <div class="solution-intro">
+            <p class="intro-text">
+                SE Tech Developer is a free, virtual immersion program that supports first and second-year college students majoring in Computer Science and Software Engineering. Through hands-on training, mentorship, and career preparation, students gain the technical and professional skills needed to succeed in the tech industry. The Tech Developer program bridges the gap between academic learning and workforce readiness, ensuring students are equipped to thrive in internships and early career roles.
+            </p>
+            <p class="intro-text">
+                SEO Tech Developer acts as a trusted navigator between organizations and students. We prepare, coach, and endorse students using an evidence-based approach so employers can trust their readiness and students don't fall through the cracks.
+            </p>
+        </div>
+
+        <!-- Solution Cards Grid -->
+        <div class="solution-cards">
+            <!-- Card 1: Strategic Recruitment -->
+            <div class="solution-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-icon">
+                    <svg class="icon-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Globe with magnifying glass -->
+                        <circle cx="60" cy="60" r="35" stroke="url(#gradient1)" stroke-width="4" fill="none"/>
+                        <line x1="40" y1="60" x2="80" y2="60" stroke="url(#gradient1)" stroke-width="4"/>
+                        <line x1="60" y1="25" x2="60" y2="95" stroke="url(#gradient1)" stroke-width="4"/>
+                        <ellipse cx="60" cy="60" rx="20" ry="35" stroke="url(#gradient1)" stroke-width="4" fill="none"/>
+                        <!-- Magnifying glass -->
+                        <circle cx="75" cy="75" r="15" stroke="url(#gradient1)" stroke-width="4" fill="none"/>
+                        <line x1="86" y1="86" x2="98" y2="98" stroke="url(#gradient1)" stroke-width="4" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6b2dd6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#9b59f5;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3 class="card-title">Strategic Recruitment</h3>
+                <p class="card-description">
+                    We work with hiring teams to understand workforce needs find high-potential college sophomores/rising juniors interested in pursuing a tech role.
+                </p>
+            </div>
+
+            <!-- Card 2: Paid Training -->
+            <div class="solution-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-icon">
+                    <svg class="icon-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- ID Badge -->
+                        <rect x="30" y="25" width="60" height="70" rx="8" stroke="url(#gradient2)" stroke-width="4" fill="none"/>
+                        <circle cx="60" cy="50" r="12" stroke="url(#gradient2)" stroke-width="3" fill="none"/>
+                        <line x1="45" y1="70" x2="75" y2="70" stroke="url(#gradient2)" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="40" y1="80" x2="80" y2="80" stroke="url(#gradient2)" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Lanyard -->
+                        <path d="M 55 95 Q 60 105 65 95" stroke="#eb0029" stroke-width="4" fill="none"/>
+                        <defs>
+                            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4a9eff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6bb6ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3 class="card-title">Paid Training</h3>
+                <p class="card-description">
+                    Students go through an intensive 9-week paid training program that combines both technical and professional development.
+                </p>
+            </div>
+
+            <!-- Card 3: Internship -->
+            <div class="solution-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-icon">
+                    <svg class="icon-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- ID Badge with curve -->
+                        <rect x="30" y="30" width="55" height="65" rx="6" stroke="url(#gradient3)" stroke-width="4" fill="none"/>
+                        <circle cx="57" cy="55" r="10" stroke="url(#gradient3)" stroke-width="3" fill="none"/>
+                        <line x1="45" y1="72" x2="70" y2="72" stroke="url(#gradient3)" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="42" y1="82" x2="72" y2="82" stroke="url(#gradient3)" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Curved lanyard -->
+                        <path d="M 57 95 Q 75 85 85 105" stroke="#eb0029" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4a9eff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6bb6ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3 class="card-title">Internship</h3>
+                <p class="card-description">
+                    Ongoing mentorship and upskilling to reduce onboarding time. SEO also helps partner organizations prepare for return offers/full time conversion through high-impact events.
+                </p>
+            </div>
+
+            <!-- Card 4: Full-Time Hire -->
+            <div class="solution-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="card-icon">
+                    <svg class="icon-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Computer screen with person and checkmark -->
+                        <rect x="25" y="30" width="70" height="50" rx="4" stroke="url(#gradient4)" stroke-width="4" fill="none"/>
+                        <line x1="35" y1="85" x2="85" y2="85" stroke="url(#gradient4)" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="60" y1="80" x2="60" y2="85" stroke="url(#gradient4)" stroke-width="4"/>
+                        <!-- Person icon -->
+                        <circle cx="50" cy="50" r="8" fill="#4a9eff"/>
+                        <path d="M 50 58 L 50 68 M 45 62 L 50 62 L 55 62" stroke="#4a9eff" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Checkmark -->
+                        <path d="M 70 45 L 75 50 L 85 38" stroke="#00c853" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#4d4d4d;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3 class="card-title">Full-Time Hire</h3>
+                <p class="card-description">
+                    Job-ready talent for immediate impact.
+                </p>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="decorative-blob blob-left"></div>
+        <div class="decorative-blob blob-right"></div>
+    </div>
+</section>
+
+<!-- ========================================
+     KEY STATS SECTION - HTML ONLY (IMPROVED)
+     ======================================== -->
+
+<section class="key-stats">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="stats-header">
+            <h2 class="section-title">2025 Cohort: Key Stats & Highlights</h2>
+            <p class="stats-subtitle">CORE AND LITE TECH DEVELOPER PROGRAMS</p>
+        </div>
+
+        <!-- Introduction Text -->
+        <div class="stats-intro-wrapper">
+            <p class="stats-intro">
+                We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
+            </p>
+        </div>
+
+        <!-- Stats Layout -->
+        <div class="stats-layout">
+            <!-- Left Side: Chart -->
+            <div class="stats-main">
+                <h3 class="stats-section-title">Overall Numbers</h3>
+                <div class="chart-container">
+                    <h4 class="chart-title">Accepted Students by Year</h4>
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Right Side: Staggered Stats Cards -->
+            <div class="stats-sidebar">
+                <div class="stat-card" data-count="3000" data-aos="fade-left" data-aos-delay="100">
+                    <div class="stat-number">3000+</div>
+                    <div class="stat-label">Applications<br>received</div>
+                </div>
+                <div class="stat-card" data-count="423" data-aos="fade-left" data-aos-delay="200">
+                    <div class="stat-number">423</div>
+                    <div class="stat-label">Colleges<br>represented</div>
+                </div>
+                <div class="stat-card" data-count="164" data-aos="fade-left" data-aos-delay="300">
+                    <div class="stat-number">164</div>
+                    <div class="stat-label">Students<br>admitted</div>
+                </div>
+                <div class="stat-card" data-count="113" data-aos="fade-left" data-aos-delay="400">
+                    <div class="stat-number">113</div>
+                    <div class="stat-label">First-generation<br>college students</div>
+                </div>
+                <div class="stat-card" data-count="105" data-aos="fade-left" data-aos-delay="500">
+                    <div class="stat-number">105</div>
+                    <div class="stat-label">Pell-eligible<br>students</div>
+                </div>
+                <div class="stat-card" data-count="3.61" data-aos="fade-left" data-aos-delay="600">
+                    <div class="stat-number">3.61</div>
+                    <div class="stat-label">Average<br>cumulative GPA</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="decorative-circle stats-circle-left"></div>
+        <div class="decorative-circle stats-circle-right"></div>
+    </div>
+</section>
+
+
+
+ <!-- new added content start-->
+<!-- Key Impacts Section -->
+<section class="impacts-section">
+    <div class="container">
+        <h2 class="section-title">Key Impacts Unveiled</h2>
+        
+        <!-- Three Impact Cards -->
+        <div class="impact-cards">
+            <div class="impact-card" data-delay="0">
+                <div class="impact-icon">
+                    <img src="images/group projects.jpg" alt="Group Projects" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                </div>
+                <h3>Group Projects</h3>
+
+                <p>-Real-world application of concepts</p>
+                <p>-Team collaboration experience in an internship environment </p>
+                <p>-Full-stack development practice integrating AI tools </p>
+               <p>-Resume-worthy portfolio pieces</p>
+            </div>
+
+            <div class="impact-card" data-delay="100">
+                <div class="impact-icon">
+                    <img src="images/em.jpg" alt="EM Mentorship" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                </div>
+                <h3>EM Mentorship</h3>
+                <p>-Personalized guidance and support</p>
+                <p>-Industry insights and career advice 
+</p>
+                <p>-Regular check-ins and feedback 
+</p>
+                <p>-Professional development
+</p>
+                
+            </div>
+
+            <div class="impact-card" data-delay="200">
+                <div class="impact-icon">
+                    <img src="images/devcon.jpg" alt="TechDevCon" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                </div>
+                <h3>TechDevCon</h3>
+                <p>-Networking opportunities with industry professionals
+</p>
+                <p>-Meeting fellow interns in person Panel discussions and workshops 
+</p>
+                <p>-Career development sessions
+</p>
+            </div>
+        </div>
+
+        <!-- Student Experience Section -->
+        <div class="student-experience">
+            <h2 class="experience-title">Student Experience</h2>
+            <p class="experience-subtitle">Likert Scale 1-5; Strongly Disagree -> Strongly Agree I n=105</p>
+            
+            <div class="survey-stats">
+                <div class="survey-card" data-delay="0">
+                    <div class="gauge-container">
+                        <canvas id="satisfactionGauge" width="200" height="120"></canvas>
+                    </div>
+                    <div class="survey-info">
+                        <div class="survey-score">4.75/5</div>
+                        <div class="survey-label">Overall Satisfaction</div>
+                    </div>
+                </div>
+
+                <div class="survey-card" data-delay="100">
+                    <div class="gauge-container">
+                        <canvas id="recommendGauge" width="200" height="120"></canvas>
+                    </div>
+                    <div class="survey-info">
+                        <div class="survey-score">9.52/10</div>
+                        <div class="survey-label">Students would highly
+recommend this program
+to a friend</div>
+                    </div>
+                </div>
+
+                <div class="survey-card" data-delay="200">
+                    <div class="gauge-container">
+                        <canvas id="npsGauge" width="200" height="120"></canvas>
+                    </div>
+                    <div class="survey-info">
+                        <div class="survey-score">87%</div>
+                        <div class="survey-label">Net Promoter Score*
+*Promoters (9-10): 87%;
+Passives (7-8): 13%;
+Detractors (0-6): 0%</div>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</section>
+
+
+ 
+  <!-- end  -->
+
+
+  <!-- Instruction & Coaching -->
+    <section class="instruction-coaching">
+        <div class="container">
+            <h2 class="section-title">INSTRUCTION & COACHING</h2>
+            <div class="coaching-grid">
+                <div class="coaching-section">
+                    <h3 class="coaching-title">MENTORSHIP</h3>
+                    <img src="images/mentorship.jpg" alt="Mentorship" class="coaching-image">
+                    <p class="coaching-description">
+                        Throughout the summer, students are paired in small groups with an experienced Engineering Manager (EM) who works closely with them on technical and professional development skills. This one-on-one support ensures individualized guidance for each student's career goals. The EMs come from software engineering and project manager backgrounds, and many have CS teaching experience that enables them to proactively meet their students' needs.
+                    </p>
+                    <div class="rating-stats">
+                        <div class="rating-item">
+                            <div class="rating-score">4.77/5</div>
+                            <div class="rating-label">Coach Quality</div>
+                        </div>
+                        <div class="rating-item">
+                            <div class="rating-score">4.72/5</div>
+                            <div class="rating-label">Training Clarity</div>
+                        </div>
+                        <div class="rating-item">
+                            <div class="rating-score">4.56/5</div>
+                            <div class="rating-label">Project Building<br>Experience</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="coaching-section">
+                    <h3 class="coaching-title">PROJECTS</h3>
+                    <div class="project-showcase">
+                        <img src="images/intellsp.png" alt="IntelliSpeech" class="project-thumb">
+                        <img src="images/bite.png" alt="BiteBuddy" class="project-thumb">
+                        <img src="images/CivicBridge.png" alt="CivicBridge" class="project-thumb">
+                        <img src="images/Let.png" alt="Let's Set Sail" class="project-thumb">
+                    </div>
+                    <p class="coaching-description">
+                        The Summer Residency culminates in a final project where students showcase the skills they learn in frontend and backend development. Students are expected to adhere to industry-standard project management frameworks and SWE standards. They work in groups of 3-5, meeting regularly with their EMs to guide their progress. Once students deploy their projects online, external judges review their work and provide tech leadership roles review their work and provide feedback and mentorship. Projects function as a realistic gateway for students from academic backgrounds to apply lessons from the curriculum.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Learning & Growth Outcomes -->
+    <section class="learning-outcomes">
+        <div class="container">
+            <h2 class="section-title">Learning & Growth Outcomes</h2>
+            <div class="codio-section">
+                <div class="codio-content">
+                    <img src="images/1.png" alt="Codio Platform" class="codio-image">
+                    <div class="codio-text">
+                        <p>Codio is a flexible, accessible, and scalable platform for Computer Science teachers and students. The Tech Developer curriculum is developed by CS professors and industry professionals, regularly updated to align with the latest industry trends. Designed to prepare students for industry-level experiences, the project-based curriculum focuses on the gaps between academic coursework and knowledge expected of a corporate SWE intern.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote class="testimonial-quote">
+                        What I found most impactful about the program was the environment of like-minded students and mentors who genuinely believed in me. Being surrounded by people who share similar ambitions and values was incredibly empowering and encouraging—It made me feel supported, motivated, and confident in my abilities.
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <strong>Amen Divine Ikamba</strong><br>
+                        <span>Pitzer Collage</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote class="testimonial-quote">
+                        What I found most impactful about the program was the environment of like-minded students and mentors who genuinely believed in me. Being surrounded by people who share similar ambitions and values was incredibly empowering and encouraging—It made me feel supported, motivated, and confident in my abilities.
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <strong>Amen Divine Ikamba</strong><br>
+                        <span>Pitzer Collage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- TechDevCon -->
+    <section class="techdevcon">
+        <div class="container">
+            <h2 class="section-title">TechDevCon</h2>
+            <p class="techdevcon-description">
+                The Tech Developer Conference (TechDevCon) marks the conclusion of the Summer Residency where students and tech professionals come together in NYC for three days of learning, exchange, and connection. The conference includes fireside chats, panels, roundtable discussions, and interactive demos from industry experts, emerging tech leaders, and SEO partners.
+            </p>
+            <h3 class="event-subtitle">Event Highlights</h3>
+            <div class="event-highlights">
+                <div class="event-card">
+                    <img src="images/1 se.jpg" alt="Networking Event">
+                    <h4>Networking Event & President speech</h4>
+                    <p class="event-day">Day 1</p>
+                </div>
+                <div class="event-card">
+                    <img src="images/2 se.jpg" alt="Segun Akinyemi talk">
+                    <h4>Segun Akinyemi talk about AI</h4>
+                    <p class="event-day">Day 1</p>
+                </div>
+                <div class="event-card">
+                    <img src="images/3 se.jpg" alt="Students asking questions">
+                    <h4>Students asking questions</h4>
+                    <p class="event-day">Day 2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+
+
+
 
     <!-- First Year Academy -->
     <section class="first-year-academy">
@@ -119,227 +911,22 @@
                 The tech industry needs a strong, skilled, and diverse early talent pipeline to meet today's and tomorrow's workforce demands. Through partnerships, we're able to grow this effort and support more students on their path from classroom to career.
             </p>
             <div class="partners-grid">
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=BMO" alt="BMO"></div>
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=MetLife" alt="MetLife Foundation"></div>
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=The+Hg+Foundation" alt="The Hg Foundation"></div>
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=FACTSET" alt="FactSet"></div>
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=Knight+Foundation" alt="Knight Foundation"></div>
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=3M" alt="3M"></div>
-                <div class="partner-logo"><img src="https://via.placeholder.com/200x80/ffffff/000000?text=Citi" alt="Citi"></div>
+                <div class="partner-logo"><img src="images/pat2/BMO.png" alt="BMO"></div>
+                <div class="partner-logo"><img src="images/pat2/met.png" alt="MetLife Foundation"></div>
+                <div class="partner-logo"><img src="images/pat2/heg.png" alt="The Hg Foundation"></div>
+                <div class="partner-logo"><img src="images/pat2/fact.png" alt="FactSet"></div>
+                <div class="partner-logo"><img src="images/pat2/knigt.png" alt="Knight Foundation"></div>
+                <div class="partner-logo"><img src="images/pat2/3m.png" alt="3M"></div>
+                <div class="partner-logo"><img src="images/pat2/citi.png" alt="Citi"></div>
             </div>
         </div>
     </section>
 
-    <!-- Learning & Growth Outcomes -->
-    <section class="learning-outcomes">
-        <div class="container">
-            <h2 class="section-title">Learning & Growth Outcomes</h2>
-            <div class="codio-section">
-                <div class="codio-content">
-                    <img src="https://via.placeholder.com/400x300/ffffff/000000?text=Codio+Platform" alt="Codio Platform" class="codio-image">
-                    <div class="codio-text">
-                        <p>Codio is a flexible, accessible, and scalable platform for Computer Science teachers and students. The Tech Developer curriculum is developed by CS professors and industry professionals, regularly updated to align with the latest industry trends. Designed to prepare students for industry-level experiences, the project-based curriculum focuses on the gaps between academic coursework and knowledge expected of a corporate SWE intern.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonials">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <blockquote class="testimonial-quote">
-                        What I found most impactful about the program was the environment of like-minded students and mentors who genuinely believed in me. Being surrounded by people who share similar ambitions and values was incredibly empowering and encouraging—It made me feel supported, motivated, and confident in my abilities.
-                    </blockquote>
-                    <div class="testimonial-author">
-                        <strong>Amen Divine Ikamba</strong><br>
-                        <span>Fitchburg State College</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <blockquote class="testimonial-quote">
-                        What I found most impactful about the program was the environment of like-minded students and mentors who genuinely believed in me. Being surrounded by people who share similar ambitions and values was incredibly empowering and encouraging—It made me feel supported, motivated, and confident in my abilities.
-                    </blockquote>
-                    <div class="testimonial-author">
-                        <strong>Amen Divine Ikamba</strong><br>
-                        <span>Fitchburg State College</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
+    
+    
 
-    <!-- TechDevCon -->
-    <section class="techdevcon">
-        <div class="container">
-            <h2 class="section-title">TechDevCon</h2>
-            <p class="techdevcon-description">
-                The Tech Developer Conference (TechDevCon) marks the conclusion of the Summer Residency where students and tech professionals come together in NYC for three days of learning, exchange, and connection. The conference includes fireside chats, panels, roundtable discussions, and interactive demos from industry experts, emerging tech leaders, and SEO partners.
-            </p>
-            <h3 class="event-subtitle">Event Highlights</h3>
-            <div class="event-highlights">
-                <div class="event-card">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/ac40a619852e429c9fc836888abcc39a" alt="Networking Event">
-                    <h4>Networking Event & President speech</h4>
-                    <p class="event-day">Day 1</p>
-                </div>
-                <div class="event-card">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/ac40a619852e429c9fc836888abcc39a" alt="Segun Akinyemi talk">
-                    <h4>Segun Akinyemi talk about AI</h4>
-                    <p class="event-day">Day 1</p>
-                </div>
-                <div class="event-card">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/ac40a619852e429c9fc836888abcc39a" alt="Students asking questions">
-                    <h4>Students asking questions</h4>
-                    <p class="event-day">Day 2</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Key Stats & Highlights -->
-    <section class="key-stats">
-        <div class="container">
-            <h2 class="section-title">2025 Cohort: Key Stats & Highlights</h2>
-            <p class="stats-subtitle">CORE AND LITE TECH DEVELOPER PROGRAMS</p>
-            <p class="stats-intro">
-                We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
-            </p>
-            
-            <div class="stats-layout">
-                <div class="stats-main">
-                    <h3 class="stats-section-title">Overall Numbers</h3>
-                    <div class="chart-container">
-                        <h4>Accepted Students by Year</h4>
-                        <canvas id="growthChart"></canvas>
-                    </div>
-                </div>
-                <div class="stats-sidebar">
-                    <div class="stat-highlight" data-count="3000">
-                        <div class="stat-big-number">0+</div>
-                        <div class="stat-big-label">Applications<br>received</div>
-                    </div>
-                    <div class="stat-highlight" data-count="423">
-                        <div class="stat-big-number">0</div>
-                        <div class="stat-big-label">Colleges<br>represented</div>
-                    </div>
-                    <div class="stat-highlight" data-count="164">
-                        <div class="stat-big-number">0</div>
-                        <div class="stat-big-label">Students<br>admitted</div>
-                    </div>
-                    <div class="stat-highlight" data-count="113">
-                        <div class="stat-big-number">0</div>
-                        <div class="stat-big-label">First-generation<br>college students</div>
-                    </div>
-                    <div class="stat-highlight" data-count="105">
-                        <div class="stat-big-number">0</div>
-                        <div class="stat-big-label">Pell-eligible<br>students</div>
-                    </div>
-                    <div class="stat-highlight" data-count="3.61">
-                        <div class="stat-big-number">0</div>
-                        <div class="stat-big-label">Average<br>cumulative GPA</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Instruction & Coaching -->
-    <section class="instruction-coaching">
-        <div class="container">
-            <h2 class="section-title">INSTRUCTION & COACHING</h2>
-            <div class="coaching-grid">
-                <div class="coaching-section">
-                    <h3 class="coaching-title">MENTORSHIP</h3>
-                    <img src="https://page.gensparksite.com/v1/base64_upload/f28e82dd61ffee476b678c4950b78e52" alt="Mentorship" class="coaching-image">
-                    <p class="coaching-description">
-                        Throughout the summer, students are paired in small groups with an experienced Engineering Manager (EM) who works closely with them on technical and professional development skills. This one-on-one support ensures individualized guidance for each student's career goals. The EMs come from software engineering and project manager backgrounds, and many have CS teaching experience that enables them to proactively meet their students' needs.
-                    </p>
-                    <div class="rating-stats">
-                        <div class="rating-item">
-                            <div class="rating-score">4.77/5</div>
-                            <div class="rating-label">Coach Quality</div>
-                        </div>
-                        <div class="rating-item">
-                            <div class="rating-score">4.72/5</div>
-                            <div class="rating-label">Training Clarity</div>
-                        </div>
-                        <div class="rating-item">
-                            <div class="rating-score">4.56/5</div>
-                            <div class="rating-label">Project Building<br>Experience</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="coaching-section">
-                    <h3 class="coaching-title">PROJECTS</h3>
-                    <div class="project-showcase">
-                        <img src="https://via.placeholder.com/300x200/ffffff/eb0029?text=IntelliSpeech" alt="IntelliSpeech" class="project-thumb">
-                        <img src="https://via.placeholder.com/300x200/ffffff/eb0029?text=BiteBuddy" alt="BiteBuddy" class="project-thumb">
-                        <img src="https://via.placeholder.com/300x200/ffffff/eb0029?text=CivicBridge" alt="CivicBridge" class="project-thumb">
-                        <img src="https://via.placeholder.com/300x200/ffffff/eb0029?text=Let's+Set+Sail" alt="Let's Set Sail" class="project-thumb">
-                    </div>
-                    <p class="coaching-description">
-                        The Summer Residency culminates in a final project where students showcase the skills they learn in frontend and backend development. Students are expected to adhere to industry-standard project management frameworks and SWE standards. They work in groups of 3-5, meeting regularly with their EMs to guide their progress. Once students deploy their projects online, external judges review their work and provide tech leadership roles review their work and provide feedback and mentorship. Projects function as a realistic gateway for students from academic backgrounds to apply lessons from the curriculum.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Key Impacts -->
-    <section class="key-impacts">
-        <div class="container">
-            <h2 class="section-title">From Survey to Spotlight: Key Impacts Unveiled</h2>
-            <div class="impacts-grid">
-                <div class="impact-category">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/8a1e572bdd1e793d8c6e532f95f71e85" alt="Group projects" class="impact-image">
-                    <h3 class="impact-title">Group projects</h3>
-                    <ul class="impact-list">
-                        <li>Real-world application of concepts</li>
-                        <li>Team collaboration experience</li>
-                        <li>Full-stack development practice integrating AI tools</li>
-                        <li>Resume-worthy portfolio pieces</li>
-                    </ul>
-                </div>
-                <div class="impact-category">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/8a1e572bdd1e793d8c6e532f95f71e85" alt="Engineering Manager Mentorship" class="impact-image">
-                    <h3 class="impact-title">Engineering Manager (EM) Mentorship</h3>
-                    <ul class="impact-list">
-                        <li>Personalized guidance and support</li>
-                        <li>Industry insights and career advice</li>
-                        <li>Regular check-ins and feedback</li>
-                        <li>Professional development</li>
-                    </ul>
-                </div>
-                <div class="impact-category">
-                    <img src="https://page.gensparksite.com/v1/base64_upload/8a1e572bdd1e793d8c6e532f95f71e85" alt="TechDevCon" class="impact-image">
-                    <h3 class="impact-title">TechDevCon</h3>
-                    <ul class="impact-list">
-                        <li>Networking opportunities with industry professionals</li>
-                        <li>Meeting fellow interns in person (Panel discussions and workshops)</li>
-                        <li>Career development sessions</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="experience-metrics">
-                <h3 class="metrics-title">Student Experience</h3>
-                <p class="metrics-subtitle">LIKERT SCALE 1-5: STRONGLY DISAGREE → STRONGLY AGREE | N=105</p>
-                <div class="metrics-display">
-                    <div class="metric-gauge">
-                        <canvas id="satisfactionGauge"></canvas>
-                        <div class="metric-label">Overall Satisfaction</div>
-                    </div>
-                    <div class="metric-gauge">
-                        <canvas id="recommendGauge"></canvas>
-                        <div class="metric-label">Students would highly<br>recommend this program<br>to a friend</div>
-                    </div>
-                    <div class="metric-gauge">
-                        <canvas id="npsGauge"></canvas>
-                        <div class="metric-label">Net Promoter Score*<br>*Promoters (9-10): 87%;<br>Passives (7-8): 13%;<br>Detractors (0-6): 0%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Footer -->
     <footer class="footer">
@@ -354,9 +941,9 @@
                     <a href="mailto:contact@seo-usa.org">Contact Us</a>
                 </div>
                 <div class="footer-social">
-                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                    <a href="#" aria-label="Twitter">Twitter</a>
-                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="https://www.linkedin.com/school/seousa/" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="https://twitter.com/seoscholarsnyc" aria-label="Twitter">Twitter</a>
+                    <a href="https://www.instagram.com/seoscholarsnyc/?hl=en" aria-label="Instagram">Instagram</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -367,5 +954,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script src="impacts-section-v2.js"></script>
+
 </body>
 </html>
