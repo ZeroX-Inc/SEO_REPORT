@@ -765,5 +765,420 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// ========================================
+// IMPROVED HEADER - Interactive Effects
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Get header element
+    const header = document.querySelector('.header');
+    
+    // Add scroll effect to header
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Add 'scrolled' class when scrolled down
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Optional: Smooth scroll to top on logo click
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Optional: Add entrance animation
+    setTimeout(() => {
+        header.style.opacity = '1';
+        header.style.transform = 'translateY(0)';
+    }, 100);
+});
+
+// Optional: Initial state for entrance animation
+document.querySelector('.header').style.opacity = '0';
+document.querySelector('.header').style.transform = 'translateY(-20px)';
+document.querySelector('.header').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+// ========================================
+// LEARNING & GROWTH OUTCOMES
+// Animated Vertical Bar Charts
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Intersection Observer for cards
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay || 0;
+                
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate bars after card becomes visible
+                    setTimeout(() => {
+                        animateBars(entry.target);
+                    }, 300);
+                }, delay);
+                
+                cardObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all outcome cards
+    document.querySelectorAll('.outcome-card').forEach(card => {
+        cardObserver.observe(card);
+    });
+});
+
+// Animate bars function
+function animateBars(card) {
+    const bars = card.querySelectorAll('.bar');
+    const growthIndicator = card.querySelector('.growth-indicator');
+    
+    bars.forEach((bar, index) => {
+        const targetValue = parseFloat(bar.dataset.value);
+        
+        // Start animation with slight delay between bars
+        setTimeout(() => {
+            bar.style.height = targetValue + '%';
+            bar.classList.add('animated');
+            
+            // Animate the number counting up
+            animateCounter(bar, targetValue);
+        }, index * 400);
+    });
+    
+    // Show growth indicator after bars animate
+    setTimeout(() => {
+        if (growthIndicator) {
+            growthIndicator.classList.add('visible');
+        }
+    }, 2000);
+}
+
+// Counter animation function
+function animateCounter(bar, targetValue) {
+    const valueElement = bar.querySelector('.bar-value');
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+    
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth acceleration/deceleration
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        
+        const currentValue = easeOutCubic * targetValue;
+        valueElement.textContent = currentValue.toFixed(1) + '%';
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            // Ensure final value is exact
+            valueElement.textContent = targetValue.toFixed(1) + '%';
+        }
+    }
+    
+    requestAnimationFrame(updateCounter);
+}
+
+// Optional: Add hover effect to bars
+document.addEventListener('DOMContentLoaded', function() {
+    const bars = document.querySelectorAll('.bar');
+    
+    bars.forEach(bar => {
+        bar.addEventListener('mouseenter', function() {
+            this.style.transform = 'scaleX(1.1)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        bar.addEventListener('mouseleave', function() {
+            this.style.transform = 'scaleX(1)';
+        });
+    });
+});
+
+// Optional: Parallax effect on scroll
+window.addEventListener('scroll', () => {
+    const section = document.querySelector('.learning-growth-section');
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const scrolled = window.pageYOffset;
+    
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+        const yPos = -(scrolled * 0.15);
+        section.style.backgroundPosition = `center ${yPos}px`;
+    }
+});
+
+
+// ========================================
+// TESTIMONIALS SECTION - Interactive Carousel
+// ========================================
+
+// Testimonial Data
+const testimonials = [
+    {
+        name: "Amen Divine Ikamba",
+        school: "Pitzer College",
+        year: "Class of 2027",
+        image: "images/members/amen.jpg",
+        quote: "What I found most impactful about the program was the environment of like-minded students and mentors who genuinely believed in me. Being surrounded by people who share similar ambitions and values was incredibly empowering and encouraging—it made me feel supported, motivated, and confident in my abilities."
+    },
+    {
+        name: "Ayush Parambath",
+        school: "University of South Carolina",
+        year: "Class of 2027",
+        image: "images/members/Ayush.jpeg",
+        quote: "I found the projects to be the most impactful. They gave us an opportunity to really experience the full software development cycle from generating an idea to building a working application to presenting it to a business and technical oriented audience with AI fluency."
+    },
+    {
+        name: "Riddhima Yadav",
+        school: "The University of Texas at Austin",
+        year: "Class of 2027",
+        image: "images/members/rid.jpg",
+        quote: "The most impactful part of the program was the incredible guidance and supportive culture. I truly felt that everyone was invested in my growth and success, and it opened doors I never could have imagined. Before joining, I felt somewhat lost in navigating the job market, but the mentorship, resources, and encouragement I received here have given me clarity and confidence in my next steps."
+    },
+    {
+        name: " Anisha Bhaskar Torres",
+        school: "The University of Texas at Austin",
+        year: "Class of 2027",
+        image: "images/members/anisha.jpg",
+        quote: "I found the preparation for industry as most impactful. For example, learning about agile methodologies, building web apps end-to-end, the DSA/Leetcode training. Those were so helpful and I feel so much more confident about my abilities now. "
+    },
+    {
+        name: "Chinmayi Ranade",
+        school: "George Mason University",
+        year: "Class of 2027",
+        image: "images/members/Chinmayi.jpeg",
+        quote: "The weekly Codio assignments were incredibly valuable. Each one introduced new concepts and skills that built on one another, and I feel like I gained a strong foundation that I’ll continue applying in future projects. "
+    },
+    {
+        name: "Carolyn Lu",
+        school: "Rice University",
+        year: "Class of 2027",
+        image: "images/members/Carolyn.jpg",
+        quote: "My TechDevCon experience was incredibly rewarding. From the mix of panels and talks, I gained valuable insights from industry leaders who shared practical advice as well as their journeys in tech. It was also an opportunity to not only meet the interns from my EM group that I have worked with on projects, but also to meet everyone else that I have only seen through Zoom. I was able to build meaningful connections with a cohort of genuinely kind and supportive people. The conference helped me feel more connected to the tech community and motivated me to keep learning and pushing myself."
+    },
+    {
+        name: "Sahara Smith",
+        school: "The University of Tulsa",
+        year: "Class of 2028",
+        image: "images/members/Sahara.jpeg",
+        quote: "Having access to the [Teaching Assistants] as mentors was really great, they were so friendly and helpful, and I loved getting to connect with people working in industry because I've never had that opportunity before! I definitely learned a lot about planning and building projects and I feel much more confident about developing my own future personal projects. "
+    }
+];
+
+// Current slide index
+let currentSlide = 0;
+let isAnimating = false;
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeTestimonials();
+    setupEventListeners();
+    startAutoPlay();
+});
+
+// Initialize testimonials
+function initializeTestimonials() {
+    updateTestimonial(0, false);
+    updateProgressIndicator();
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Previous arrow
+    const prevArrow = document.querySelector('.prev-arrow');
+    if (prevArrow) {
+        prevArrow.addEventListener('click', () => {
+            navigateTestimonial('prev');
+        });
+    }
+    
+    // Next arrow
+    const nextArrow = document.querySelector('.next-arrow');
+    if (nextArrow) {
+        nextArrow.addEventListener('click', () => {
+            navigateTestimonial('next');
+        });
+    }
+    
+    // Thumbnail clicks
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => {
+            if (index !== currentSlide) {
+                updateTestimonial(index);
+            }
+        });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            navigateTestimonial('prev');
+        } else if (e.key === 'ArrowRight') {
+            navigateTestimonial('next');
+        }
+    });
+    
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const testimonialContent = document.querySelector('.testimonial-content');
+    if (testimonialContent) {
+        testimonialContent.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        testimonialContent.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+    }
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                navigateTestimonial('next');
+            } else {
+                navigateTestimonial('prev');
+            }
+        }
+    }
+}
+
+// Navigate testimonial
+function navigateTestimonial(direction) {
+    if (isAnimating) return;
+    
+    let newIndex;
+    if (direction === 'next') {
+        newIndex = (currentSlide + 1) % testimonials.length;
+    } else {
+        newIndex = (currentSlide - 1 + testimonials.length) % testimonials.length;
+    }
+    
+    updateTestimonial(newIndex);
+}
+
+// Update testimonial display
+function updateTestimonial(index, animate = true) {
+    if (isAnimating) return;
+    
+    isAnimating = true;
+    currentSlide = index;
+    
+    const testimonial = testimonials[index];
+    const testimonialText = document.querySelector('.testimonial-text');
+    
+    // Add fade animation
+    if (animate) {
+        testimonialText.style.opacity = '0';
+        testimonialText.style.transform = 'translateX(20px)';
+    }
+    
+    setTimeout(() => {
+        // Update content
+        document.getElementById('current-member-image').src = testimonial.image;
+        document.getElementById('current-member-name').textContent = testimonial.name;
+        document.getElementById('current-testimonial').textContent = testimonial.quote;
+        document.getElementById('current-member-school').textContent = testimonial.school;
+        document.getElementById('current-member-year').textContent = testimonial.year;
+        
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+            thumb.classList.toggle('active', i === index);
+        });
+        
+        // Update progress
+        updateProgressIndicator();
+        
+        // Fade in
+        if (animate) {
+            testimonialText.style.opacity = '1';
+            testimonialText.style.transform = 'translateX(0)';
+        }
+        
+        setTimeout(() => {
+            isAnimating = false;
+        }, 100);
+    }, animate ? 300 : 0);
+}
+
+// Update progress indicator
+function updateProgressIndicator() {
+    const currentSlideEl = document.querySelector('.current-slide');
+    const totalSlidesEl = document.querySelector('.total-slides');
+    
+    if (currentSlideEl) {
+        currentSlideEl.textContent = currentSlide + 1;
+    }
+    
+    if (totalSlidesEl) {
+        totalSlidesEl.textContent = testimonials.length;
+    }
+}
+
+// Auto-play functionality
+let autoPlayInterval;
+
+function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+        navigateTestimonial('next');
+    }, 7000); // Change slide every 7 seconds
+}
+
+function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+}
+
+// Pause auto-play on hover
+const testimonialMain = document.querySelector('.testimonial-main');
+if (testimonialMain) {
+    testimonialMain.addEventListener('mouseenter', stopAutoPlay);
+    testimonialMain.addEventListener('mouseleave', startAutoPlay);
+}
+
+// Pause auto-play when page is hidden
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        stopAutoPlay();
+    } else {
+        startAutoPlay();
+    }
+});
+
+// Smooth transition styles
+const testimonialText = document.querySelector('.testimonial-text');
+if (testimonialText) {
+    testimonialText.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+}
 
 
