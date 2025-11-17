@@ -599,6 +599,7 @@
     </div>
 </section>
 
+
 <!-- ========================================
      KEY STATS SECTION - HTML ONLY (IMPROVED)
      ======================================== -->
@@ -611,54 +612,56 @@
             <p class="stats-subtitle">CORE AND LITE TECH DEVELOPER PROGRAMS</p>
         </div>
 
-        <!-- Introduction Text - Full Width -->
+        <!-- Introduction Text -->
         <div class="stats-intro-wrapper">
             <p class="stats-intro">
                 We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
             </p>
         </div>
 
-        <!-- Section Title -->
-        <h3 class="stats-section-title">Overall Numbers</h3>
-
-        <!-- Stats Layout: Chart Left, Cards Right -->
+        <!-- Stats Layout -->
         <div class="stats-layout">
             <!-- Left Side: Chart -->
             <div class="stats-main">
+                <h3 class="stats-section-title">Overall Numbers</h3>
                 <div class="chart-container">
                     <h4 class="chart-title">Accepted Students by Year</h4>
                     <canvas id="growthChart"></canvas>
                 </div>
             </div>
 
-            <!-- Right Side: Stats Grid (3x2) -->
+            <!-- Right Side: Staggered Stats Cards -->
             <div class="stats-sidebar">
-                <div class="stat-card">
+                <div class="stat-card" data-count="3000" data-aos="fade-left" data-aos-delay="100">
                     <div class="stat-number">3000+</div>
-                    <div class="stat-label">Applications received</div>
+                    <div class="stat-label">Applications<br>received</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-count="423" data-aos="fade-left" data-aos-delay="200">
                     <div class="stat-number">423</div>
-                    <div class="stat-label">Colleges represented</div>
+                    <div class="stat-label">Colleges<br>represented</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-count="164" data-aos="fade-left" data-aos-delay="300">
                     <div class="stat-number">164</div>
-                    <div class="stat-label">Students admitted</div>
+                    <div class="stat-label">Students<br>admitted</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-count="113" data-aos="fade-left" data-aos-delay="400">
                     <div class="stat-number">113</div>
-                    <div class="stat-label">First generation college students</div>
+                    <div class="stat-label">First-generation<br>students</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-count="105" data-aos="fade-left" data-aos-delay="500">
                     <div class="stat-number">105</div>
-                    <div class="stat-label">Pell-eligible students</div>
+                    <div class="stat-label">Pell-eligible<br>students</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-count="3.61" data-aos="fade-left" data-aos-delay="600">
                     <div class="stat-number">3.61</div>
-                    <div class="stat-label">Average cumulative GPA</div>
+                    <div class="stat-label">Average<br>cumulative GPA</div>
                 </div>
             </div>
         </div>
+
+        <!-- Decorative Elements -->
+        <div class="decorative-circle stats-circle-left"></div>
+        <div class="decorative-circle stats-circle-right"></div>
     </div>
 </section>
 
@@ -777,17 +780,50 @@ Detractors (0-6): 0%</div>
                         Throughout the summer, students are paired in small groups with an experienced Engineering Manager (EM) who works closely with them on technical and professional development skills. This one-on-one support ensures individualized guidance for each student's career goals. The EMs come from software engineering and project manager backgrounds, and many have CS teaching experience that enables them to proactively meet their students' needs.
                     </p>
                     <div class="rating-stats">
-                        <div class="rating-item">
-                            <div class="rating-score">4.77/5</div>
+                        <div class="rating-item" data-rating="4.77">
+                            <div class="rating-score" data-target="4.77">0</div>
+                            <div class="rating-suffix">/5</div>
+                            <div class="coaching-star-rating" data-rating="4.77">
+                                <span class="coaching-star" data-star="1">★</span>
+                                <span class="coaching-star" data-star="2">★</span>
+                                <span class="coaching-star" data-star="3">★</span>
+                                <span class="coaching-star" data-star="4">★</span>
+                                <span class="coaching-star" data-star="5">★</span>
+                            </div>
                             <div class="rating-label">Coach Quality</div>
+                            <div class="rating-progress-bar">
+                                <div class="rating-progress-fill" data-width="95.4"></div>
+                            </div>
                         </div>
-                        <div class="rating-item">
-                            <div class="rating-score">4.72/5</div>
+                        <div class="rating-item" data-rating="4.72">
+                            <div class="rating-score" data-target="4.72">0</div>
+                            <div class="rating-suffix">/5</div>
+                            <div class="coaching-star-rating" data-rating="4.72">
+                                <span class="coaching-star" data-star="1">★</span>
+                                <span class="coaching-star" data-star="2">★</span>
+                                <span class="coaching-star" data-star="3">★</span>
+                                <span class="coaching-star" data-star="4">★</span>
+                                <span class="coaching-star" data-star="5">★</span>
+                            </div>
                             <div class="rating-label">Training Clarity</div>
+                            <div class="rating-progress-bar">
+                                <div class="rating-progress-fill" data-width="94.4"></div>
+                            </div>
                         </div>
-                        <div class="rating-item">
-                            <div class="rating-score">4.56/5</div>
-                            <div class="rating-label">Project Building<br>Experience</div>
+                        <div class="rating-item" data-rating="4.56">
+                            <div class="rating-score" data-target="4.56">0</div>
+                            <div class="rating-suffix">/5</div>
+                            <div class="coaching-star-rating" data-rating="4.56">
+                                <span class="coaching-star" data-star="1">★</span>
+                                <span class="coaching-star" data-star="2">★</span>
+                                <span class="coaching-star" data-star="3">★</span>
+                                <span class="coaching-star" data-star="4">★</span>
+                                <span class="coaching-star" data-star="5">★</span>
+                            </div>
+                            <div class="rating-label">Project Building Experience</div>
+                            <div class="rating-progress-bar">
+                                <div class="rating-progress-fill" data-width="91.2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1074,38 +1110,61 @@ motivated, and confident in my abilities.
     <!-- First Year Academy -->
     <section class="first-year-academy">
         <div class="container">
-            <div class="fya-grid">
-                <div class="fya-text">
-                    <h2 class="fya-title">First Year Academy</h2>
-                    <p class="fya-subtitle">GROWING THE PIPELINE FROM DAY ONE</p>
-                    <p class="fya-description">
-                        First Year Academy is an early intervention for first-year college students who have declared or plan to declare a major in Computer Science. In this exploratory training program, 75+ participants learn and apply Python coding fundamentals to build their own project with Codio and Pygame. Participants who complete the First Year Academy will have mastered the core computer programming fundamentals required to successfully apply and gain admission into SEO Tech Developer following completion of their sophomore year.
-                    </p>
+            <!-- Section Header -->
+            <div class="fya-header">
+                <h2 class="fya-title">First Year Academy</h2>
+                <p class="fya-subtitle">GROWING THE PIPELINE FROM DAY ONE</p>
+                <p class="fya-description">
+                    First Year Academy is an early intervention for first-year college students who have declared or plan to declare a major in Computer Science. In this exploratory training program, 75+ participants learn and apply Python coding fundamentals to build their own project with Codio and Pygame. Participants who complete the First Year Academy will have mastered the core computer programming fundamentals required to successfully apply and gain admission into SEO Tech Developer following completion of their sophomore year.
+                </p>
+            </div>
+
+            <!-- Interactive Stats Grid -->
+            <div class="fya-stats-grid">
+                <div class="fya-stat-card" data-stat="4.59">
+                    <div class="fya-stat-number" data-target="4.59">0</div>
+                    <div class="fya-stat-suffix">/5</div>
+                    <div class="fya-star-rating" data-rating="4.59">
+                        <span class="fya-star" data-star="1">★</span>
+                        <span class="fya-star" data-star="2">★</span>
+                        <span class="fya-star" data-star="3">★</span>
+                        <span class="fya-star" data-star="4">★</span>
+                        <span class="fya-star" data-star="5">★</span>
+                    </div>
+                    <div class="fya-stat-divider"></div>
+                    <div class="fya-stat-label">Overall Satisfaction</div>
+                    <div class="fya-progress-bar">
+                        <div class="fya-progress-fill" data-width="91.8"></div>
+                    </div>
                 </div>
-                <div class="fya-stats">
-                    <div class="stat-card" data-count="1000">
-                        <div class="stat-number">0+</div>
-                        <div class="stat-label">Completed<br>Projects</div>
+
+                <div class="fya-stat-card" data-stat="91.9">
+                    <div class="fya-stat-number" data-target="91.9">0</div>
+                    <div class="fya-stat-suffix">%</div>
+                    <div class="fya-stat-divider"></div>
+                    <div class="fya-stat-label">Report feeling more confident in their technical skills</div>
+                    <div class="fya-progress-bar">
+                        <div class="fya-progress-fill" data-width="91.9"></div>
                     </div>
-                    <div class="stat-card" data-count="1000">
-                        <div class="stat-number">0+</div>
-                        <div class="stat-label">Completed<br>Projects</div>
+                </div>
+
+                <div class="fya-stat-card" data-stat="86.5">
+                    <div class="fya-stat-number" data-target="86.5">0</div>
+                    <div class="fya-stat-suffix">%</div>
+                    <div class="fya-stat-divider"></div>
+                    <div class="fya-stat-label">Report feeling more confident in planning and implementing projects from scratch</div>
+                    <div class="fya-progress-bar">
+                        <div class="fya-progress-fill" data-width="86.5"></div>
                     </div>
-                    <div class="stat-card" data-count="1000">
-                        <div class="stat-number">0+</div>
-                        <div class="stat-label">Completed<br>Projects</div>
-                    </div>
-                    <div class="stat-card" data-count="1000">
-                        <div class="stat-number">0+</div>
-                        <div class="stat-label">Completed<br>Projects</div>
-                    </div>
-                    <div class="stat-card" data-count="1000">
-                        <div class="stat-number">0+</div>
-                        <div class="stat-label">Completed<br>Projects</div>
-                    </div>
-                    <div class="stat-card" data-count="1000">
-                        <div class="stat-number">0+</div>
-                        <div class="stat-label">Completed<br>Projects</div>
+                </div>
+
+                <div class="fya-stat-card" data-stat="78.4">
+                    <div class="fya-stat-number" data-target="78.4">0</div>
+                    <div class="fya-stat-suffix">%</div>
+                    <div class="fya-stat-divider"></div>
+                    <div class="fya-stat-label">Report being more interested in pursuing a career in tech</div>
+                    <div class="fya-progress-bar">
+                        <div class="fya-progress-fill" data-width="78.4"></div>
                     </div>
                 </div>
             </div>
@@ -1162,6 +1221,7 @@ motivated, and confident in my abilities.
     <script src="script.js"></script>
     <script src="impacts-section-v2.js"></script>
     <script src="fya-counter-fix.js"></script>
+    <script src="fya-animations.js"></script>
 
 </body>
 </html>
