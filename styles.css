@@ -55,48 +55,8 @@ body {
     align-items: center;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-}
 
-.logo-seo {
-    background: var(--color-primary);
-    color: var(--color-white);
-    padding: 8px 12px;
-    font-size: 24px;
-    font-weight: bold;
-}
 
-.logo-text {
-    font-size: 18px;
-    line-height: 1.2;
-    color: var(--color-black);
-}
-
-.donate-btn {
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.donate-btn a{
-    text-decoration: none;
-    color:#fff;
-}
-
-.donate-btn:hover {
-    background: #c00020;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(235, 0, 41, 0.3);
-}
 
 /* Hero Section */
 .hero {
@@ -195,39 +155,33 @@ body {
 /* Curve Container */
 .curve-container {
     position: relative;
-    min-height: 700px;
+    width: 100%;
+    height: 680px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .curve-path {
+    width: 1305.5px;
+    height: 580.076px;
+    max-width: 100%;
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
-    height: 600px;
     z-index: 1;
-    opacity: 0;
-    animation: fadeIn 1s ease 0.5s forwards;
+    flex-shrink: 0;
 }
 
 .curve-line {
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-    animation: drawCurve 2s ease 0.8s forwards;
+    stroke: #E91D2C;
+    stroke-width: 5px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
-.curve-dot {
-    opacity: 0;
-    animation: fadeInDot 0.5s ease forwards;
-}
-
-.curve-dot:nth-child(2) { animation-delay: 2s; }
-.curve-dot:nth-child(3) { animation-delay: 2.3s; }
-.curve-dot:nth-child(4) { animation-delay: 2.6s; }
-.curve-dot:nth-child(5) { animation-delay: 2.9s; }
-
-/* Info Cards */
+/* Info Cards - Transparent Design */
 .curve-content {
     position: relative;
     z-index: 2;
@@ -235,59 +189,74 @@ body {
 
 .info-card {
     position: absolute;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    max-width: 320px;
-    transition: all 0.4s ease;
+    width: 260px;
+    z-index: 2;
+    animation: fadeIn 1.2s ease forwards;
     opacity: 0;
-    transform: translateY(30px);
+    background: transparent;
+    padding: 0;
+    border: none;
 }
 
-.info-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(235, 0, 41, 0.15);
+/* Numbered Circle on Curve */
+.circle {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 3px solid #E91D2C;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: 20px;
+}
+
+/* Large Watermark Number */
+.number {
+    position: absolute;
+    top: -100px;
+    left: 0px;
+    font-size: 72px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.06);
+    line-height: 1;
 }
 
 .card-title {
-    font-size: clamp(18px, 2vw, 22px);
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 700;
     color: #000000;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     line-height: 1.3;
 }
 
 .card-text {
-    font-size: clamp(13px, 1.5vw, 15px);
-    color: #4d4d4d;
-    line-height: 1.7;
+    font-size: 14px;
+    color: #64607D;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.32px;
+    opacity: 0.7;
 }
 
-/* Card Positioning */
+/* Card Positioning - Below the Curve */
 .card-1 {
-    top: 420px;
-    left: 0;
-    animation: fadeInUp 0.6s ease 1s forwards;
+    top: 520px;
+    left: 40px;
 }
 
 .card-2 {
-    top: 260px;
-    left: 25%;
-    animation: fadeInUp 0.6s ease 1.3s forwards;
+    top: 450px;
+    left: 320px;
 }
 
 .card-3 {
-    top: 140px;
-    right: 25%;
-    animation: fadeInUp 0.6s ease 1.6s forwards;
+    top: 320px;
+    left: 650px;
 }
 
 .card-4 {
     top: 80px;
-    right: 0;
-    background: linear-gradient(135deg, #ffe6ea 0%, #ffffff 100%);
-    animation: fadeInUp 0.6s ease 1.9s forwards;
+    left: 1020px;
 }
 
 /* Decorative Circles */
@@ -370,34 +339,67 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .curve-container {
-        min-height: 900px;
+        height: 660px;
     }
 
     .info-card {
-        max-width: 280px;
-        padding: 25px;
+        width: 240px;
     }
 
     .card-1 {
-        left: 5%;
+        left: 30px;
         top: 500px;
     }
 
     .card-2 {
-        left: 15%;
-        top: 340px;
+        left: 280px;
+        top: 430px;
     }
 
     .card-3 {
-        right: 15%;
-        top: 180px;
+        left: 580px;
+        top: 300px;
     }
 
     .card-4 {
-        right: 5%;
-        top: 50px;
+        left: 900px;
+        top: 70px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .curve-container {
+        height: 620px;
+    }
+
+    .info-card {
+        width: 220px;
+    }
+
+    .card-1 {
+        left: 20px;
+        top: 480px;
+    }
+
+    .card-2 {
+        left: 240px;
+        top: 410px;
+    }
+
+    .card-3 {
+        left: 480px;
+        top: 280px;
+    }
+
+    .card-4 {
+        left: 740px;
+        top: 60px;
+    }
+
+    .number {
+        font-size: 60px;
     }
 }
 
@@ -407,7 +409,8 @@ body {
     }
 
     .curve-container {
-        min-height: 1600px;
+        height: auto;
+        min-height: auto;
     }
 
     .curve-path {
@@ -416,27 +419,31 @@ body {
 
     .info-card {
         position: relative;
-        max-width: 100%;
-        margin-bottom: 30px;
+        width: 100%;
         left: 0 !important;
-        right: 0 !important;
         top: 0 !important;
+        margin-bottom: 50px;
     }
 
-    .card-1 {
-        animation: fadeInUp 0.6s ease 0.2s forwards;
+    .circle {
+        display: none;
     }
 
-    .card-2 {
-        animation: fadeInUp 0.6s ease 0.4s forwards;
+    .number {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 10px;
+        font-size: 48px;
     }
 
-    .card-3 {
-        animation: fadeInUp 0.6s ease 0.6s forwards;
+    .card-title {
+        font-size: 20px;
+        margin-bottom: 10px;
     }
 
-    .card-4 {
-        animation: fadeInUp 0.6s ease 0.8s forwards;
+    .card-text {
+        font-size: 15px;
     }
 
     .decorative-circle {
@@ -449,8 +456,8 @@ body {
         font-size: 28px;
     }
 
-    .info-card {
-        padding: 20px;
+    .number {
+        font-size: 40px;
     }
 
     .card-title {
@@ -721,14 +728,14 @@ body {
 
 
 /* ========================================
-   KEY STATS SECTION - CSS ONLY (IMPROVED)
+   KEY STATS SECTION - CSS ONLY (IMPROVED v2.0)
    ======================================== */
 
 /* Section Container */
 .key-stats {
     position: relative;
     padding: 120px 0;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    background: #ffffff;
     overflow: hidden;
 }
 
@@ -742,15 +749,15 @@ body {
 /* Section Header */
 .stats-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     animation: fadeInDown 0.8s ease;
 }
 
 .section-title {
-    font-size: clamp(32px, 5vw, 42px);
+    font-size: clamp(36px, 5vw, 52px);
     font-weight: bold;
     color: #000000;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     letter-spacing: -0.5px;
 }
 
@@ -758,29 +765,38 @@ body {
     font-size: clamp(11px, 1.5vw, 13px);
     color: #eb0029;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
 }
 
 /* Introduction */
 .stats-intro-wrapper {
-    max-width: 900px;
-    margin: 0 auto 60px;
+    max-width: 100%;
+    margin: 0 auto 50px;
     animation: fadeInUp 0.8s ease 0.2s both;
 }
 
 .stats-intro {
-    font-size: clamp(14px, 1.6vw, 15px);
+    font-size: clamp(14px, 1.6vw, 16px);
     line-height: 1.8;
     color: #4d4d4d;
     text-align: left;
 }
 
-/* Stats Layout */
+/* Section Title - Outside Grid */
+.stats-section-title {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+/* Stats Layout - Two Column */
 .stats-layout {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
     align-items: start;
     position: relative;
     z-index: 2;
@@ -791,55 +807,62 @@ body {
     animation: fadeInLeft 0.8s ease 0.4s both;
 }
 
-.stats-section-title {
-    font-size: clamp(24px, 3vw, 28px);
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 25px;
+.chart-container {
+    background: #f5f5f7;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #e5e5e7;
+    box-shadow: none;
+    max-width: 100%;
 }
 
-.chart-container {
-    background: #ffffff;
-    padding: 35px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+.chart-container canvas {
+    max-height: 280px !important;
+    width: 100% !important;
 }
 
 .chart-title {
-    font-size: clamp(16px, 2vw, 18px);
+    font-size: clamp(13px, 1.6vw, 15px);
     font-weight: 600;
     color: #000000;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
-/* Right Side - Staggered Stats Cards */
+/* Right Side - Stats Grid (2 columns, 3 rows auto) - MATCHING FIRST YEAR ACADEMY */
 .stats-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
     position: relative;
 }
 
-.stat-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-    padding: 30px 35px;
+.key-stats .stat-card {
+    background: #ffffff;
+    padding: 25px 15px;
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
     opacity: 0;
-    transform: translateX(30px);
-    animation: slideInRight 0.6s ease forwards;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 110px;
+    max-width: 100%;
 }
 
-/* Staggered positioning - alternating left/right */
+/* Remove staggered positioning */
 .stat-card:nth-child(odd) {
-    margin-right: 30px;
+    margin-right: 0;
 }
 
 .stat-card:nth-child(even) {
-    margin-left: 30px;
+    margin-left: 0;
 }
 
 /* Animation delays */
@@ -867,54 +890,34 @@ body {
     animation-delay: 0.6s;
 }
 
-.stat-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 50px rgba(235, 0, 41, 0.15);
+.key-stats .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(235, 0, 41, 0.15);
 }
 
 /* Stat Number */
-.stat-number {
-    font-size: clamp(36px, 5vw, 52px);
-    font-weight: bold;
+.key-stats .stat-number {
+    font-size: clamp(36px, 5vw, 48px);
+    font-weight: 700;
     color: #eb0029;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     line-height: 1;
 }
 
 /* Stat Label */
-.stat-label {
-    font-size: clamp(12px, 1.4vw, 14px);
-    color: #4d4d4d;
-    line-height: 1.5;
-    font-weight: 500;
+.key-stats .stat-label {
+    font-size: clamp(10px, 1.1vw, 12px);
+    color: #6b6b6b;
+    line-height: 1.4;
+    font-weight: 400;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
 }
 
-/* Decorative Circles */
-.decorative-circle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.06;
-    z-index: 0;
-    filter: blur(80px);
-}
-
-.stats-circle-left {
-    width: 600px;
-    height: 600px;
-    background: linear-gradient(135deg, #eb0029 0%, #ff6b8a 100%);
-    top: -200px;
-    left: -300px;
-    animation: float 15s ease-in-out infinite;
-}
-
-.stats-circle-right {
-    width: 700px;
-    height: 700px;
-    background: linear-gradient(135deg, #6b2dd6 0%, #9b59f5 100%);
-    bottom: -300px;
-    right: -350px;
-    animation: float 18s ease-in-out infinite reverse;
-}
+/* Decorative Circles - Removed for cleaner look */
 
 /* Animations */
 @keyframes fadeInDown {
@@ -3067,4 +3070,66 @@ section.visible {
         width: 60px;
         height: 60px;
     }
+}
+/* --- SWIPER CAROUSEL STYLES --- */
+
+/* This sets a max-width for your slider and centers it */
+.techdev-highlights-slider {
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px 0; /* Add some space above/below */
+    overflow: hidden; /* Recommended for sliders */
+}
+
+/* This ensures your card content fills the slide */
+.techdev-highlights-slider .swiper-slide {
+    height: auto; /* Allows slide to grow with content */
+    display: flex;
+    justify-content: center;
+}
+
+/* This styles your existing card to work well inside a slide */
+.event-card {
+    width: 100%; /* Make card fill the slide's width */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make all cards the same height */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.event-card img {
+    width: 100%;
+    height: 200px; /* Give images a consistent height */
+    object-fit: cover; /* Prevents stretching */
+    border-radius: 8px 8px 0 0;
+}
+
+.event-card h4 {
+    font-size: 1.2rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+    margin: 0;
+}
+
+.event-card .event-day {
+    font-size: 0.9rem;
+    color: #555;
+    padding: 0 1rem 1rem 1rem;
+    margin: 0;
+    margin-top: auto; /* Pushes day to the bottom */
+}
+
+/* --- Optional: Style Swiper's Arrows and Dots --- */
+
+/* This makes the navigation arrows dark grey */
+.techdev-highlights-slider .swiper-button-prev,
+.techdev-highlights-slider .swiper-button-next {
+    color: #333;
+}
+
+/* This makes the pagination dots dark grey */
+.techdev-highlights-slider .swiper-pagination-bullet-active {
+    background-color: #333;
 }

@@ -162,25 +162,7 @@ function createGaugeChart(elementId, value, max, label) {
                     enabled: false
                 }
             }
-        },
-        plugins: [{
-            id: 'gaugeText',
-            afterDraw: (chart) => {
-                const { ctx, chartArea: { width, height } } = chart;
-                ctx.save();
-                
-                const centerX = width / 2;
-                const centerY = height / 1.2;
-                
-                ctx.font = 'bold 32px "Founders Grotesk"';
-                ctx.fillStyle = '#eb0029';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(label, centerX, centerY);
-                
-                ctx.restore();
-            }
-        }]
+        }
     });
 }
 
@@ -242,6 +224,20 @@ if ('IntersectionObserver' in window) {
         imageObserver.observe(img);
     });
 }
+
+// Program Overview timeline items - Intersection Observer
+const timelineItems = document.querySelectorAll('.info-card');
+
+const timelineObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            timelineObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+timelineItems.forEach(item => timelineObserver.observe(item));
 
 // Add hover effects for interactive elements
 document.querySelectorAll('.stat-card, .partner-logo, .event-card, .testimonial-card').forEach(element => {
