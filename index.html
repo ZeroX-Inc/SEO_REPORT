@@ -9,58 +9,311 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="impacts-section-v2.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Founders Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
 
+        /* Hero Section */
+        .hero {
+            margin-top: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.6) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1.2s ease;
+            padding: 40px 20px;
+        }
+
+        .hero-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-year {
+            font-size: clamp(60px, 12vw, 140px);
+            letter-spacing: 8px;
+            animation: slideInFromLeft 1s ease 0.2s both;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-impact {
+            font-size: clamp(70px, 14vw, 160px);
+            letter-spacing: 12px;
+            animation: scaleIn 1s ease 0.4s both;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .hero-impact::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: #eb0029;
+            animation: expandWidth 0.8s ease 1s both;
+        }
+
+        .hero-summary {
+            font-size: clamp(50px, 10vw, 120px);
+            letter-spacing: 10px;
+            animation: slideInFromRight 1s ease 0.6s both;
+            background: linear-gradient(135deg, #eb0029 0%, #ff1744 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            animation: fadeIn 1s ease 1.5s both;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 3px solid #ffffff;
+            border-radius: 20px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 80%;
+            }
+        }
+
+        @keyframes scrollDown {
+            0%, 100% { 
+                top: 10px; 
+                opacity: 1; 
+            }
+            50% { 
+                top: 30px; 
+                opacity: 0.3; 
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero-year {
+                font-size: 50px;
+                letter-spacing: 4px;
+            }
+
+            .hero-impact {
+                font-size: 60px;
+                letter-spacing: 6px;
+            }
+
+            .hero-summary {
+                font-size: 40px;
+                letter-spacing: 5px;
+            }
+
+            .hero-title {
+                gap: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Hero Section with Auto-Scrolling Carousel -->
-    <section class="hero-carousel">
-        <!-- Carousel Slides -->
-        <div class="carousel-track">
-            <div class="carousel-slide active">
-                <img src="images/SEO Tech Dev Con.jpg" alt="SEO Tech Developer 2025" class="slide-image">
-            </div>
-            <div class="carousel-slide">
-                <img src="images/SEO Tech Dev Con Recruiters.jpg" alt="SEO Tech Developer Conference" class="slide-image">
-            </div>
-            <div class="carousel-slide">
-                <img src="images/SEO Tech Dev Con 2025_2438.jpg" alt="SEO Tech Developer Program" class="slide-image">
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/Logo.svg" alt="SEO Tech Developer" style="height: 50px; width: auto;">
             </div>
         </div>
+    </header>
 
-        <!-- Gradient Overlay -->
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="hero-overlay"></div>
-
-        <!-- Hero Content -->
-        <div class="hero-content-wrapper">
-            <div class="hero-logo">
-                <img src="images/Logo.svg" alt="SEO Tech Developer Logo" class="logo-svg">
-            </div>
-            <div class="hero-text-content">
-                <h1 class="hero-main-title">
-                    <span class="title-line">2025</span>
-                    <span class="title-line highlight">IMPACT SUMMARY</span>
-                </h1>
-                <p class="hero-tagline">Building America's Next Generation of Tech Leaders</p>
+        <img src="images/hero.jpg" alt="2025 Impact Summary" class="hero-background">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text-wrapper">
+                    <h1 class="hero-title">
+                        <span class="hero-year">2025</span>
+                        <span class="hero-impact">IMPACT</span>
+                        <span class="hero-summary">SUMMARY</span>
+                    </h1>
+                </div>
             </div>
         </div>
-
-        <!-- Carousel Indicators -->
-        <div class="carousel-indicators">
-            <button class="indicator active" data-slide="0"></button>
-            <button class="indicator" data-slide="1"></button>
-            <button class="indicator" data-slide="2"></button>
-        </div>
-
-        <!-- Scroll Indicator -->
         <div class="scroll-indicator">
             <div class="scroll-arrow"></div>
         </div>
     </section>
 
-
-
+    <script>
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.hero-background');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (heroBackground) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+            
+            // Fade out hero content on scroll
+            const hero = document.querySelector('.hero');
+            if (hero && heroContent) {
+                const opacity = 1 - (scrolled / (window.innerHeight * 0.8));
+                heroContent.style.opacity = Math.max(0, opacity);
+            }
+        });
+    </script>
 
     <!-- Mission Statement -->
     <section class="mission">
@@ -330,59 +583,63 @@
      ======================================== -->
 
 <section class="key-stats">
-    <div class="stats-header-section">
-        <h2 class="stats-main-title">2025 Cohort: Key Stats & Highlights</h2>
-        <p class="stats-main-subtitle">CORE AND LITE TECH DEVELOPER PROGRAMS</p>
-        <p class="stats-intro-text">
-            We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
-        </p>
-    </div>
+    <div class="container">
+        <!-- Section Header -->
+        <div class="stats-header">
+            <h2 class="section-title">2025 Cohort: Key Stats & Highlights</h2>
+            <p class="stats-subtitle">CORE AND LITE TECH DEVELOPER PROGRAMS</p>
+        </div>
 
-    <div class="stats-wrapper">
+        <!-- Stats Layout -->
+        <div class="stats-layout">
+            <!-- Left Side: Intro Text + Chart -->
+            <div class="stats-main">
+                <!-- Introduction Text -->
+                <div class="stats-intro-wrapper">
+                    <p class="stats-intro">
+                        We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
+                    </p>
+                </div>
 
-        <!-- LEFT SIDE -->
-        <div class="stats-main">
-            <h3 class="stats-section-title">Overall Numbers</h3>
+                <h3 class="stats-section-title">Overall Numbers</h3>
+                <div class="chart-container">
+                    <h4 class="chart-title">Accepted Students by Year</h4>
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
 
-            <div class="chart-container">
-                <h4 class="chart-title">Accepted Students by Year</h4>
-                <canvas id="growthChart"></canvas>
+            <!-- Right Side: Staggered Stats Cards -->
+            <div class="stats-sidebar">
+                <div class="stat-card" data-count="3000" data-aos="fade-left" data-aos-delay="100">
+                    <div class="stat-number">3000+</div>
+                    <div class="stat-label">Applications<br>received</div>
+                </div>
+                <div class="stat-card" data-count="423" data-aos="fade-left" data-aos-delay="200">
+                    <div class="stat-number">423</div>
+                    <div class="stat-label">Colleges<br>represented</div>
+                </div>
+                <div class="stat-card" data-count="164" data-aos="fade-left" data-aos-delay="300">
+                    <div class="stat-number">164</div>
+                    <div class="stat-label">Students<br>admitted</div>
+                </div>
+                <div class="stat-card" data-count="113" data-aos="fade-left" data-aos-delay="400">
+                    <div class="stat-number">113</div>
+                    <div class="stat-label">First-generation<br>students</div>
+                </div>
+                <div class="stat-card" data-count="105" data-aos="fade-left" data-aos-delay="500">
+                    <div class="stat-number">105</div>
+                    <div class="stat-label">Pell-eligible<br>students</div>
+                </div>
+                <div class="stat-card" data-count="3.61" data-aos="fade-left" data-aos-delay="600">
+                    <div class="stat-number">3.61</div>
+                    <div class="stat-label">Average<br>cumulative GPA</div>
+                </div>
             </div>
         </div>
 
-        <!-- RIGHT SIDE -->
-        <div class="stats-sidebar">
-            <div class="stat-card">
-                <div class="stat-number">3000+</div>
-                <div class="stat-label">Applications<br>received</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-number">423</div>
-                <div class="stat-label">Colleges<br>represented</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-number">164</div>
-                <div class="stat-label">Students<br>admitted</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-number">113</div>
-                <div class="stat-label">First-generation<br>students</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-number">105</div>
-                <div class="stat-label">Pell-eligible<br>students</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-number">3.61</div>
-                <div class="stat-label">Average<br>cumulative GPA</div>
-            </div>
-        </div>
-
+        <!-- Decorative Elements -->
+        <div class="decorative-circle stats-circle-left"></div>
+        <div class="decorative-circle stats-circle-right"></div>
     </div>
 </section>
 
@@ -582,7 +839,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Pre</div>
                             <div class="bar-track">
-                                <div class="bar pre-bar" data-value="16.2" style="height: 16.2%;">
+                                <div class="bar pre-bar" data-value="16.2" style="height: 0%;">
                                     <span class="bar-value">16.2%</span>
                                 </div>
                             </div>
@@ -590,7 +847,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Post</div>
                             <div class="bar-track">
-                                <div class="bar post-bar" data-value="95.2" style="height: 95.2%;">
+                                <div class="bar post-bar" data-value="95.2" style="height: 0%;">
                                     <span class="bar-value">95.2%</span>
                                 </div>
                             </div>
@@ -613,7 +870,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Pre</div>
                             <div class="bar-track">
-                                <div class="bar pre-bar" data-value="32.9" style="height: 32.9%;">
+                                <div class="bar pre-bar" data-value="32.9" style="height: 0%;">
                                     <span class="bar-value">32.9%</span>
                                 </div>
                             </div>
@@ -621,7 +878,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Post</div>
                             <div class="bar-track">
-                                <div class="bar post-bar" data-value="97.6" style="height: 97.6%;">
+                                <div class="bar post-bar" data-value="97.6" style="height: 0%;">
                                     <span class="bar-value">97.6%</span>
                                 </div>
                             </div>
@@ -644,7 +901,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Pre</div>
                             <div class="bar-track">
-                                <div class="bar pre-bar" data-value="15.2" style="height: 15.2%;">
+                                <div class="bar pre-bar" data-value="15.2" style="height: 0%;">
                                     <span class="bar-value">15.2%</span>
                                 </div>
                             </div>
@@ -652,7 +909,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Post</div>
                             <div class="bar-track">
-                                <div class="bar post-bar" data-value="87.6" style="height: 87.6%;">
+                                <div class="bar post-bar" data-value="87.6" style="height: 0%;">
                                     <span class="bar-value">87.6%</span>
                                 </div>
                             </div>
@@ -676,7 +933,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Pre</div>
                             <div class="bar-track">
-                                <div class="bar pre-bar" data-value="87.3" style="height: 87.3%;">
+                                <div class="bar pre-bar" data-value="87.3" style="height: 0%;">
                                     <span class="bar-value">87.3%</span>
                                 </div>
                             </div>
@@ -684,7 +941,7 @@ Detractors (0-6): 0%</div>
                         <div class="bar-group">
                             <div class="bar-label">Post</div>
                             <div class="bar-track">
-                                <div class="bar post-bar" data-value="95.2" style="height: 95.2%;">
+                                <div class="bar post-bar" data-value="95.2" style="height: 0%;">
                                     <span class="bar-value">95.2%</span>
                                 </div>
                             </div>
@@ -939,12 +1196,10 @@ motivated, and confident in my abilities.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="hero-carousel.js"></script>
     <script src="script.js"></script>
     <script src="impacts-section-v2.js"></script>
     <script src="fya-counter-fix.js"></script>
     <script src="fya-animations.js"></script>
-    <script src="key-stats-animations.js"></script>
 
 </body>
 </html>

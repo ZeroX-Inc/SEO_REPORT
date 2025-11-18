@@ -1,3 +1,49 @@
+// Header scroll behavior - add solid background when scrolled
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Enhanced stat card interactions
+document.addEventListener('DOMContentLoaded', () => {
+    const statCards = document.querySelectorAll('.key-stats .stat-card');
+
+    statCards.forEach((card, index) => {
+        // Add ripple effect on click
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            this.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+
+            // Add pulse animation
+            this.style.animation = 'pulse 0.3s ease';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 300);
+        });
+
+        // Add hover sound effect indicator (visual only)
+        card.addEventListener('mouseenter', function() {
+            this.style.setProperty('--hover-time', Date.now());
+        });
+    });
+});
+
 // Intersection Observer for scroll animations
 const observerOptions = {
     threshold: 0.1,
