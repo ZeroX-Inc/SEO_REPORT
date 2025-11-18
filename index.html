@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="impacts-section-v2.css">
     <link rel="stylesheet" href="key-stats-redesign.css">
+    <link rel="stylesheet" href="hero-carousel.css">
     <style>
         /* Reset */
         * {
@@ -23,298 +24,95 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section */
-        .hero {
-            margin-top: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            z-index: 1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                135deg,
-                rgba(0, 0, 0, 0.6) 0%,
-                rgba(0, 0, 0, 0.4) 50%,
-                rgba(0, 0, 0, 0.7) 100%
-            );
-            z-index: 2;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
-            z-index: 3;
-        }
-
-        .hero-content {
-            text-align: center;
-            animation: fadeInUp 1.2s ease;
-            padding: 40px 20px;
-        }
-
-        .hero-text-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-title {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-year {
-            font-size: clamp(60px, 12vw, 140px);
-            letter-spacing: 8px;
-            animation: slideInFromLeft 1s ease 0.2s both;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-impact {
-            font-size: clamp(70px, 14vw, 160px);
-            letter-spacing: 12px;
-            animation: scaleIn 1s ease 0.4s both;
-            color: #ffffff;
-            position: relative;
-        }
-
-        .hero-impact::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 4px;
-            background: #eb0029;
-            animation: expandWidth 0.8s ease 1s both;
-        }
-
-        .hero-summary {
-            font-size: clamp(50px, 10vw, 120px);
-            letter-spacing: 10px;
-            animation: slideInFromRight 1s ease 0.6s both;
-            background: linear-gradient(135deg, #eb0029 0%, #ff1744 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 4;
-            animation: fadeIn 1s ease 1.5s both;
-        }
-
-        .scroll-arrow {
-            width: 30px;
-            height: 50px;
-            border: 3px solid #ffffff;
-            border-radius: 20px;
-            position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .scroll-arrow::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background: #ffffff;
-            border-radius: 50%;
-            transform: translateX(-50%);
-            animation: scrollDown 2s infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes expandWidth {
-            from {
-                width: 0;
-            }
-            to {
-                width: 80%;
-            }
-        }
-
-        @keyframes scrollDown {
-            0%, 100% { 
-                top: 10px; 
-                opacity: 1; 
-            }
-            50% { 
-                top: 30px; 
-                opacity: 0.3; 
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero {
-                min-height: 80vh;
-            }
-
-            .hero-year {
-                font-size: 50px;
-                letter-spacing: 4px;
-            }
-
-            .hero-impact {
-                font-size: 60px;
-                letter-spacing: 6px;
-            }
-
-            .hero-summary {
-                font-size: 40px;
-                letter-spacing: 5px;
-            }
-
-            .hero-title {
-                gap: 5px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="images/Logo.svg" alt="SEO Tech Developer" style="height: 50px; width: auto;">
-            </div>
-        </div>
-    </header>
+    <!-- Floating Logo -->
+    <div class="floating-logo">
+        <img src="images/Logo.svg" alt="SEO Tech Developer">
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <img src="images/hero.jpg" alt="2025 Impact Summary" class="hero-background">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text-wrapper">
-                    <h1 class="hero-title">
-                        <span class="hero-year">2025</span>
-                        <span class="hero-impact">IMPACT</span>
-                        <span class="hero-summary">SUMMARY</span>
-                    </h1>
+    <!-- Hero Carousel Section -->
+    <section class="hero-carousel">
+        <!-- Carousel Slides -->
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <div class="slide-image" style="background-image: url('images/SEO Tech Dev Con.jpg')"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-tag">TechDevCon 2025</div>
+                    <h1 class="slide-title">Connecting Innovation<br>& Opportunity</h1>
+                    <p class="slide-description">Three days of learning, networking, and community building with tech leaders and emerging talent</p>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-image" style="background-image: url('images/group projects.jpg')"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-tag">Real-World Experience</div>
+                    <h1 class="slide-title">Building Tomorrow's<br>Tech Leaders</h1>
+                    <p class="slide-description">Hands-on projects that transform classroom knowledge into industry-ready skills</p>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-image" style="background-image: url('images/em.jpg')"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-tag">Mentorship That Matters</div>
+                    <h1 class="slide-title">Guided by Industry<br>Experts</h1>
+                    <p class="slide-description">Personalized guidance from experienced Engineering Managers who invest in your success</p>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-image" style="background-image: url('images/devcon.jpg')"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-tag">2025 Impact Summary</div>
+                    <h1 class="slide-title">Transforming Talent<br>Into Excellence</h1>
+                    <p class="slide-description">164 students admitted • 423 colleges represented • 3000+ applications received</p>
                 </div>
             </div>
         </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+            <button class="carousel-btn prev-btn" aria-label="Previous slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="carousel-btn next-btn" aria-label="Next slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+            <button class="indicator active" data-slide="0"></button>
+            <button class="indicator" data-slide="1"></button>
+            <button class="indicator" data-slide="2"></button>
+            <button class="indicator" data-slide="3"></button>
+        </div>
+
+        <!-- Scroll Indicator -->
         <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <p class="scroll-text">Scroll to explore</p>
         </div>
     </section>
-
-    <script>
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroBackground = document.querySelector('.hero-background');
-            const heroContent = document.querySelector('.hero-content');
-            
-            if (heroBackground) {
-                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-            
-            if (heroContent) {
-                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-            
-            // Fade out hero content on scroll
-            const hero = document.querySelector('.hero');
-            if (hero && heroContent) {
-                const opacity = 1 - (scrolled / (window.innerHeight * 0.8));
-                heroContent.style.opacity = Math.max(0, opacity);
-            }
-        });
-    </script>
 
     <!-- Mission Statement -->
     <section class="mission">
@@ -1272,6 +1070,7 @@ motivated, and confident in my abilities.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="hero-carousel.js"></script>
     <script src="script.js"></script>
     <script src="key-stats-redesign.js"></script>
     <script src="impacts-section-v2.js"></script>
