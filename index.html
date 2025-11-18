@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="impacts-section-v2.css">
+    <link rel="stylesheet" href="key-stats-redesign.css">
     <style>
         /* Reset */
         * {
@@ -579,67 +580,142 @@
 
 
 <!-- ========================================
-     KEY STATS SECTION - HTML ONLY (IMPROVED)
+     KEY STATS SECTION - REDESIGNED FOR MAXIMUM INTERACTIVITY
      ======================================== -->
 
-<section class="key-stats">
+<section class="key-stats" id="key-stats-section">
     <div class="container">
-        <!-- Section Header -->
+        <!-- Section Header with Icon -->
         <div class="stats-header">
+            <div class="header-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <path d="M8 38L16 30L24 34L40 18" stroke="#eb0029" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="16" cy="30" r="3" fill="#eb0029"/>
+                    <circle cx="24" cy="34" r="3" fill="#eb0029"/>
+                    <circle cx="40" cy="18" r="3" fill="#eb0029"/>
+                </svg>
+            </div>
             <h2 class="section-title">2025 Cohort: Key Stats & Highlights</h2>
             <p class="stats-subtitle">CORE AND LITE TECH DEVELOPER PROGRAMS</p>
         </div>
 
+        <!-- Introduction Text -->
+        <div class="stats-intro-wrapper">
+            <p class="stats-intro">
+                We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
+            </p>
+        </div>
+
         <!-- Stats Layout -->
         <div class="stats-layout">
-            <!-- Left Side: Intro Text + Chart -->
-            <div class="stats-main">
-                <!-- Introduction Text -->
-                <div class="stats-intro-wrapper">
-                    <p class="stats-intro">
-                        We're committed to nurturing America's homegrown talent, building the next generation of innovative tech leaders who drive our nation's technological growth and economic strength. We recruit from 80+ universities, including students from top 10 ranked CS programs, Ivies, HBCUs, HSIs, and public universities.
-                    </p>
+            <!-- Interactive Stats Cards -->
+            <div class="stats-sidebar">
+                <div class="stat-card" data-stat="3000" data-suffix="+">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M28 28V25.3333C28 23.9188 27.4381 22.5623 26.4379 21.5621C25.4377 20.5619 24.0812 20 22.6667 20H9.33333C7.91885 20 6.56229 20.5619 5.5621 21.5621C4.5619 22.5623 4 23.9188 4 25.3333V28" stroke="#eb0029" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 13.3333C18.9455 13.3333 21.3333 10.9455 21.3333 8C21.3333 5.05448 18.9455 2.66667 16 2.66667C13.0545 2.66667 10.6667 5.05448 10.6667 8C10.6667 10.9455 13.0545 13.3333 16 13.3333Z" stroke="#eb0029" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Applications received</div>
+                    <div class="stat-progress"><div class="stat-progress-bar"></div></div>
                 </div>
 
-                <h3 class="stats-section-title">Overall Numbers</h3>
-                <div class="chart-container">
-                    <h4 class="chart-title">Accepted Students by Year</h4>
-                    <canvas id="growthChart"></canvas>
+                <div class="stat-card" data-stat="423">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M4 12L16 4L28 12V26C28 26.5304 27.7893 27.0391 27.4142 27.4142C27.0391 27.7893 26.5304 28 26 28H6C5.46957 28 4.96086 27.7893 4.58579 27.4142C4.21071 27.0391 4 26.5304 4 26V12Z" stroke="#115a7f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 28V16H20V28" stroke="#115a7f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Colleges represented</div>
+                    <div class="stat-progress"><div class="stat-progress-bar"></div></div>
+                </div>
+
+                <div class="stat-card" data-stat="164">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M22.6667 9.33333L12 20L7.33333 15.3333" stroke="#eb0029" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="16" cy="16" r="13" stroke="#eb0029" stroke-width="2.5"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Students admitted</div>
+                    <div class="stat-progress"><div class="stat-progress-bar"></div></div>
+                </div>
+
+                <div class="stat-card" data-stat="113">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 28L4 22V10L16 4L28 10V22L16 28Z" stroke="#115a7f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 28V16M4 10L16 16M16 16L28 10" stroke="#115a7f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">First-generation students</div>
+                    <div class="stat-progress"><div class="stat-progress-bar"></div></div>
+                </div>
+
+                <div class="stat-card" data-stat="105">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M28 8H4C2.89543 8 2 8.89543 2 10V24C2 25.1046 2.89543 26 4 26H28C29.1046 26 30 25.1046 30 24V10C30 8.89543 29.1046 8 28 8Z" stroke="#eb0029" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="16" cy="17" r="4" stroke="#eb0029" stroke-width="2.5"/>
+                            <path d="M6 8V6M26 8V6" stroke="#eb0029" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Pell-eligible students</div>
+                    <div class="stat-progress"><div class="stat-progress-bar"></div></div>
+                </div>
+
+                <div class="stat-card" data-stat="3.61">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 2L19.708 11.292L29 15L19.708 18.708L16 28L12.292 18.708L3 15L12.292 11.292L16 2Z" stroke="#115a7f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">0.00</div>
+                    <div class="stat-label">Average cumulative GPA</div>
+                    <div class="stat-progress"><div class="stat-progress-bar"></div></div>
                 </div>
             </div>
 
-            <!-- Right Side: Staggered Stats Cards -->
-            <div class="stats-sidebar">
-                <div class="stat-card" data-count="3000" data-aos="fade-left" data-aos-delay="100">
-                    <div class="stat-number">3000+</div>
-                    <div class="stat-label">Applications<br>received</div>
+            <!-- Enhanced Chart Section -->
+            <div class="stats-main">
+                <div class="chart-header">
+                    <h3 class="stats-section-title">Accepted Students by Year</h3>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot"></div>
+                            <span>Growth Trend</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-card" data-count="423" data-aos="fade-left" data-aos-delay="200">
-                    <div class="stat-number">423</div>
-                    <div class="stat-label">Colleges<br>represented</div>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
                 </div>
-                <div class="stat-card" data-count="164" data-aos="fade-left" data-aos-delay="300">
-                    <div class="stat-number">164</div>
-                    <div class="stat-label">Students<br>admitted</div>
-                </div>
-                <div class="stat-card" data-count="113" data-aos="fade-left" data-aos-delay="400">
-                    <div class="stat-number">113</div>
-                    <div class="stat-label">First-generation<br>students</div>
-                </div>
-                <div class="stat-card" data-count="105" data-aos="fade-left" data-aos-delay="500">
-                    <div class="stat-number">105</div>
-                    <div class="stat-label">Pell-eligible<br>students</div>
-                </div>
-                <div class="stat-card" data-count="3.61" data-aos="fade-left" data-aos-delay="600">
-                    <div class="stat-number">3.61</div>
-                    <div class="stat-label">Average<br>cumulative GPA</div>
+                <!-- Chart Stats Summary -->
+                <div class="chart-stats-summary">
+                    <div class="summary-item">
+                        <div class="summary-value">164%</div>
+                        <div class="summary-label">5-Year Growth</div>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item">
+                        <div class="summary-value">169</div>
+                        <div class="summary-label">Peak Year (2024)</div>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item">
+                        <div class="summary-value">53</div>
+                        <div class="summary-label">Avg. Annual Growth</div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Decorative Elements -->
-        <div class="decorative-circle stats-circle-left"></div>
-        <div class="decorative-circle stats-circle-right"></div>
     </div>
 </section>
 
@@ -1197,6 +1273,7 @@ motivated, and confident in my abilities.
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
+    <script src="key-stats-redesign.js"></script>
     <script src="impacts-section-v2.js"></script>
     <script src="fya-counter-fix.js"></script>
     <script src="fya-animations.js"></script>

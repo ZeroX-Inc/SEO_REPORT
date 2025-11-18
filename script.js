@@ -8,7 +8,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Enhanced stat card interactions
+// Enhanced stat card interactions with counter animations
 document.addEventListener('DOMContentLoaded', () => {
     const statCards = document.querySelectorAll('.key-stats .stat-card');
 
@@ -42,7 +42,90 @@ document.addEventListener('DOMContentLoaded', () => {
             this.style.setProperty('--hover-time', Date.now());
         });
     });
+
+    // Key Stats Section - Scroll animations
+    const keyStatsSection = document.querySelector('.key-stats');
+    if (keyStatsSection) {
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate header
+                    const header = entry.target.querySelector('.stats-header');
+                    if (header) {
+                        setTimeout(() => header.classList.add('visible'), 100);
+                    }
+
+                    // Animate intro
+                    const intro = entry.target.querySelector('.stats-intro-wrapper');
+                    if (intro) {
+                        setTimeout(() => intro.classList.add('visible'), 200);
+                    }
+
+                    // Animate stat cards with stagger
+                    const cards = entry.target.querySelectorAll('.stat-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                            // Start counter animation
+                            animateStatCounter(card);
+                        }, 400 + (index * 100));
+                    });
+
+                    // Animate chart container
+                    const chartContainer = entry.target.querySelector('.chart-container');
+                    if (chartContainer) {
+                        setTimeout(() => chartContainer.classList.add('visible'), 800);
+                    }
+
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        statsObserver.observe(keyStatsSection);
+    }
 });
+
+// Animate stat numbers with counter effect
+function animateStatCounter(card) {
+    const numberElement = card.querySelector('.stat-number');
+    if (!numberElement) return;
+
+    const text = numberElement.textContent.trim();
+    const hasPlus = text.includes('+');
+    const numericValue = parseFloat(text.replace(/[^0-9.]/g, ''));
+
+    if (isNaN(numericValue)) return;
+
+    const duration = 2000;
+    const startTime = performance.now();
+
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentValue = easeOutQuart * numericValue;
+
+        // Format based on the original value
+        if (numericValue >= 1000) {
+            numberElement.textContent = Math.floor(currentValue).toLocaleString() + (hasPlus ? '+' : '');
+        } else if (numericValue % 1 !== 0) {
+            numberElement.textContent = currentValue.toFixed(2);
+        } else {
+            numberElement.textContent = Math.floor(currentValue).toString();
+        }
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            numberElement.textContent = text; // Restore original text
+        }
+    }
+
+    requestAnimationFrame(updateCounter);
+}
 
 // Intersection Observer for scroll animations
 const observerOptions = {
@@ -99,41 +182,90 @@ function animateCounter(element) {
 window.addEventListener('load', () => {
     const growthCtx = document.getElementById('growthChart');
     if (growthCtx) {
-        new Chart(growthCtx, {
+        // Create a larger, full-bleed chart with gradient fill for better visibility
+        const gCtx = growthCtx.getContext('2d');
+        // Create vertical gradient that fits the container height
+        const gradient = gCtx.createLinearGradient(0, 0, 0, 520);
+        gradient.addColorStop(0, 'rgba(235, 0, 41, 0.25)');
+        gradient.addColorStop(0.5, 'rgba(235, 0, 41, 0.12)');
+        gradient.addColorStop(1, 'rgba(235, 0, 41, 0.02)');
+
+        const growthChart = new Chart(growthCtx, {
             type: 'line',
             data: {
                 labels: ['2021', '2022', '2023', '2024', '2025'],
                 datasets: [{
                     label: 'Accepted Students',
                     data: [62, 77, 111, 169, 164],
-                    borderColor: '#eb0029',
-                    backgroundColor: 'rgba(235, 0, 41, 0.1)',
+                    borderColor: '#b30017',
+                    backgroundColor: gradient,
                     fill: true,
-                    tension: 0.4,
-                    borderWidth: 3,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#eb0029',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 8
+                    tension: 0.3,
+                    borderWidth: 6,
+                    pointRadius: 10,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#b30017',
+                    pointBorderWidth: 5,
+                    pointHoverRadius: 14,
+                    pointHoverBorderWidth: 6,
+                    pointHoverBackgroundColor: '#ffffff',
+                    pointHoverBorderColor: '#eb0029'
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        top: 10,
+                        right: 15,
+                        bottom: 10,
+                        left: 10
+                    }
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
                 plugins: {
                     legend: {
                         display: false
                     },
                     tooltip: {
-                        backgroundColor: '#000000',
+                        backgroundColor: 'rgba(17, 17, 17, 0.95)',
                         titleColor: '#ffffff',
                         bodyColor: '#ffffff',
-                        padding: 12,
+                        padding: 16,
                         displayColors: false,
+                        borderColor: '#eb0029',
+                        borderWidth: 2,
+                        cornerRadius: 8,
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 16,
+                            weight: '600'
+                        },
                         callbacks: {
+                            title: function(context) {
+                                return 'Year ' + context[0].label;
+                            },
                             label: function(context) {
-                                return context.parsed.y + ' students';
+                                return context.parsed.y + ' students accepted';
+                            },
+                            afterLabel: function(context) {
+                                const index = context.dataIndex;
+                                if (index > 0) {
+                                    const current = context.parsed.y;
+                                    const previous = context.chart.data.datasets[0].data[index - 1];
+                                    const change = current - previous;
+                                    const percentage = ((change / previous) * 100).toFixed(1);
+                                    const arrow = change >= 0 ? '↑' : '↓';
+                                    return arrow + ' ' + Math.abs(change) + ' (' + (change >= 0 ? '+' : '') + percentage + '%)';
+                                }
+                                return '';
                             }
                         }
                     }
@@ -145,30 +277,45 @@ window.addEventListener('load', () => {
                         max: 220,
                         ticks: {
                             stepSize: 40,
-                            color: '#4d4d4d',
+                            color: '#222222',
                             font: {
-                                size: 12
+                                size: 14,
+                                weight: '600'
                             }
                         },
                         grid: {
-                            color: '#e5e7e7',
-                            drawBorder: false
+                            color: '#f0f0f0',
+                            drawBorder: false,
+                            lineWidth: 1.2
                         }
                     },
                     x: {
                         ticks: {
-                            color: '#4d4d4d',
+                            color: '#222222',
                             font: {
-                                size: 12
+                                size: 14,
+                                weight: '600'
                             }
                         },
                         grid: {
                             display: false
                         }
                     }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuart'
                 }
             }
         });
+
+        // Add hover effect to chart container
+        const chartContainer = growthCtx.closest('.chart-container');
+        if (chartContainer) {
+            chartContainer.addEventListener('mouseenter', () => {
+                growthChart.options.animation.duration = 300;
+            });
+        }
     }
 
     // Gauge Charts for Student Experience
